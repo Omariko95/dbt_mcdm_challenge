@@ -1,1 +1,0 @@
-with fbreport as (select * from {{ ref("src_ads_creative_facebook_all_data") }}) select * from fbreport

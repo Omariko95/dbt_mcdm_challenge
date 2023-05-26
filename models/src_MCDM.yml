@@ -1,8 +1,0 @@
-version: 2
-
-sources:
-  - name: models
-    database: analytics
-    tables:
-      - name: src_ads_bing_all_data
-      - name: src_ads_creative_facebook_all_data

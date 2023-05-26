@@ -14,7 +14,7 @@ with
         select
             bing.date,
             null as add_to_cart,
-            nullif(bing.clicks,0) as clicks,
+            nullif(bing.clicks, 0) as clicks,
             null as comments,
             null as engagements,
             bing.imps as impressions,
@@ -45,7 +45,7 @@ with
         select
             facebook.date,
             facebook.add_to_cart,
-            nullif(facebook.clicks,0) as clicks,
+            nullif(facebook.clicks, 0) as clicks,
             facebook.comments,
             facebook.views as engagements,
             facebook.impressions,
@@ -76,7 +76,7 @@ with
         select
             tiktok.date,
             tiktok.add_to_cart,
-            nullif(tiktok.clicks,0) as clicks,
+            nullif(tiktok.clicks, 0) as clicks,
             null as comments,
             null as engagements,
             tiktok.impressions,
@@ -107,7 +107,7 @@ with
         select
             twitter.date,
             null as add_to_cart,
-            nullif(twitter.clicks,0) as clicks,
+            nullif(twitter.clicks, 0) as clicks,
             twitter.comments,
             twitter.engagements,
             twitter.impressions,
@@ -137,15 +137,12 @@ with
 
 -- Step 3: Finally recreate dashboard logic...
 select
-    sum(spend)/sum(engagements) as Cost_per_engage,
-    sum(spend)/sum(total_conversions) as Conversion_cost,
+    sum(spend) / sum(engagements) as cost_per_engage,
+    sum(spend) / sum(total_conversions) as conversion_cost,
     sum(impressions) as impressions_by_channel,
-    sum(spend)/sum(clicks) as CPC , 
+    sum(spend) / sum(clicks) as cpc,
     channel
-
 
 from paid_ads__basic_performance
 
-
-
-group by channel 
+group by channel

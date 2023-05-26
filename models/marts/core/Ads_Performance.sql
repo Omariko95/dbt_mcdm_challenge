@@ -45,7 +45,7 @@ with
         select
             facebook.date,
             facebook.add_to_cart,
-            facebook.clicks as clicks,
+            facebook.clicks,
             facebook.comments,
             facebook.views as engagements,
             facebook.impressions,
@@ -137,7 +137,7 @@ with
 
 -- Step 3: Execute select from paid_ads__basic_performance
 select
-/*
+
     date,
     add_to_cart,
     clicks,
@@ -163,16 +163,5 @@ select
     channel,
     creative_id,
     placement_id,
-    */
-    sum(spend)/sum(engagements) as Cost_per_engage,
-    sum(spend)/sum(total_conversions) as Conversion_cost,
-    sum(impressions) as impressions_by_channel,
-    -- sum(spend)/clicks as CPC , 
-    channel
-
 
 from paid_ads__basic_performance
-
-
-
-group by channel

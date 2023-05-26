@@ -14,7 +14,7 @@ with
         select
             bing.date,
             null as add_to_cart,
-            bing.clicks,
+            nullif(bing.clicks,0) as clicks,
             null as comments,
             null as engagements,
             bing.imps as impressions,
@@ -45,7 +45,7 @@ with
         select
             facebook.date,
             facebook.add_to_cart,
-            facebook.clicks as clicks,
+            nullif(facebook.clicks,0) as clicks,
             facebook.comments,
             facebook.views as engagements,
             facebook.impressions,
@@ -76,7 +76,7 @@ with
         select
             tiktok.date,
             tiktok.add_to_cart,
-            tiktok.clicks,
+            nullif(tiktok.clicks,0) as clicks,
             null as comments,
             null as engagements,
             tiktok.impressions,
@@ -107,7 +107,7 @@ with
         select
             twitter.date,
             null as add_to_cart,
-            twitter.clicks,
+            nullif(twitter.clicks,0) as clicks,
             twitter.comments,
             twitter.engagements,
             twitter.impressions,
@@ -135,39 +135,12 @@ with
 
     )
 
--- Step 3: Execute select from paid_ads__basic_performance
+-- Step 3: Finally recreate dashboard logic...
 select
-/*
-    date,
-    add_to_cart,
-    clicks,
-    comments,
-    engagements,
-    impressions,
-    installs,
-    likes,
-    link_clicks,
-    post_click_conversions,
-    post_view_conversions,
-    posts,
-    purchase,
-    registrations,
-    revenue,
-    shares,
-    spend,
-    total_conversions,
-    video_views,
-    ad_id,
-    adset_id,
-    campaign_id,
-    channel,
-    creative_id,
-    placement_id,
-    */
     sum(spend)/sum(engagements) as Cost_per_engage,
     sum(spend)/sum(total_conversions) as Conversion_cost,
     sum(impressions) as impressions_by_channel,
-    -- sum(spend)/clicks as CPC , 
+    sum(spend)/sum(clicks) as CPC , 
     channel
 
 
@@ -175,4 +148,4 @@ from paid_ads__basic_performance
 
 
 
-group by channel
+group by channel 

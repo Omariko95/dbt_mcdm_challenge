@@ -35,6 +35,6 @@ models:
   MCDM:
     marts:
       core:
-        +materialized: table
+        +materialized: view
       staging:
         +materialized: view
